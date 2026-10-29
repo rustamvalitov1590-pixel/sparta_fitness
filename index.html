@@ -208,38 +208,6 @@
     <!-- ================= HERO SECTION (BENTO EDITORIAL ARCHITECTURE) ================= -->
     <section class="hero-section" id="hero">
       <div class="container">
-
-        <!-- Mobile Web App Quick-Navigation Stories / Chips Bar -->
-        <div class="mobile-app-shortcuts" aria-label="Быстрая навигация по приложению">
-          <a href="#trials" class="app-shortcut-chip chip-hot">
-            <span class="chip-emoji">🔥</span>
-            <span>Пробная 2 000 ₸</span>
-          </a>
-          <a href="#studio-layout" class="app-shortcut-chip">
-            <span class="chip-emoji">🗺</span>
-            <span>3D-План зала</span>
-          </a>
-          <a href="#calculator" class="app-shortcut-chip chip-kaspi">
-            <span class="chip-emoji">💳</span>
-            <span>Kaspi 0-0-12</span>
-          </a>
-          <a href="#schedule" class="app-shortcut-chip">
-            <span class="chip-emoji">📅</span>
-            <span>Расписание</span>
-          </a>
-          <a href="#programs" class="app-shortcut-chip">
-            <span class="chip-emoji">👩</span>
-            <span>Женский зал</span>
-          </a>
-          <a href="#diagnostics" class="app-shortcut-chip">
-            <span class="chip-emoji">🧮</span>
-            <span>Расчет КБЖУ</span>
-          </a>
-          <a href="#branches" class="app-shortcut-chip">
-            <span class="chip-emoji">📍</span>
-            <span>2 Филиала</span>
-          </a>
-        </div>
         
         <!-- Live Real-Time Gym Occupancy Bar -->
         <div class="live-occupancy-bar" aria-label="Статус работы клубов в реальном времени">
@@ -2341,13 +2309,14 @@
     </a>
   </nav>
 
-  <!-- ================= LEAD BOOKING MODAL (BOTTOM SHEET ON MOBILE) ================= -->
+  <!-- ================= LEAD BOOKING MODAL ================= -->
   <div class="modal-backdrop" id="leadModal">
     <div class="modal-box">
-      <div class="modal-sheet-handle" aria-hidden="true"></div>
-      <button class="modal-close-btn" id="closeModalBtn" aria-label="Закрыть">✕</button>
-      <h3 class="modal-title">Запись на тренировку</h3>
-      <p class="modal-subtitle">Оставьте ваши контакты — администратор свяжется с вами и забронирует место со скидкой</p>
+      <div class="modal-header-row">
+        <h3 class="modal-title">Запись на тренировку</h3>
+        <button type="button" class="modal-close-btn" id="closeModalBtn" aria-label="Закрыть окно">✕</button>
+      </div>
+      <p class="modal-subtitle">Оставьте контакты — администратор свяжется с вами и закрепит бронь</p>
 
       <form id="leadForm">
         <div class="form-group">
@@ -2363,8 +2332,8 @@
         <div class="form-group">
           <label class="form-label" for="branchSelect">Филиал</label>
           <select id="branchSelect" class="form-select">
-            <option value="Северо-Восток">мкр. Северо-Восток 2, 47/3 (Астана)</option>
-            <option value="Курмангазы">ул. Курмангазы, 112/1 (Центр)</option>
+            <option value="Северо-Восток">мкр. Северо-Восток, 29/1</option>
+            <option value="Курмангазы">ул. Курмангазы, 150 (Центр)</option>
           </select>
         </div>
 
@@ -2373,7 +2342,7 @@
           <input type="text" id="planSelect" class="form-input" value="Пробная тренировка" readonly>
         </div>
 
-        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+        <button type="submit" class="btn btn-primary modal-submit-btn">
           Отправить заявку в WhatsApp
         </button>
       </form>
