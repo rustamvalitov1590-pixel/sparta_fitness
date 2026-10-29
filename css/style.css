@@ -4310,59 +4310,1110 @@ ul {
   }
 }
 
+/* ==========================================================================
+   MOBILE WEB APPLICATION (PWA / NATIVE APP UX ENGINE)
+   ========================================================================== */
+
+/* Hide Mobile-Only App Shell Elements on Desktop */
+.mobile-app-shortcuts,
+.mobile-app-tabbar,
+.mobile-header-icon-btn,
+.modal-sheet-handle {
+  display: none;
+}
+
 @media (max-width: 768px) {
-  .hj-hero-card {
-    padding: 1.65rem;
-    min-height: 520px;
+  /* 1. App Shell Body & Smooth Touch Physics */
+  html {
+    scroll-padding-top: 72px;
+    -webkit-tap-highlight-color: transparent;
   }
 
+  body {
+    padding-bottom: calc(82px + env(safe-area-inset-bottom, 0px));
+    background: #0a0b0e;
+    overflow-x: hidden;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .section,
+  .why-quit-section,
+  .formula-section,
+  .studio-layout-section {
+    padding: 2.65rem 0;
+  }
+
+  /* 2. Native App Top Bar Header */
+  .site-header {
+    height: 62px;
+    background: rgba(10, 11, 14, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .nav-container {
+    height: 62px;
+    padding: 0 0.9rem;
+  }
+
+  .brand-logo {
+    gap: 0.55rem;
+  }
+
+  .brand-logo-img {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+
+  .brand-name {
+    font-size: 1.02rem;
+    letter-spacing: 0.02em;
+  }
+
+  .brand-tagline {
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+  }
+
+  .header-phone-box,
+  #openModalBtn {
+    display: none !important;
+  }
+
+  .header-actions {
+    gap: 0.45rem;
+  }
+
+  .mobile-header-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+
+  .mobile-header-icon-btn:active {
+    transform: scale(0.92);
+  }
+
+  .mobile-header-icon-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+
+  .mobile-header-icon-btn.wa-btn {
+    background: rgba(37, 211, 102, 0.14);
+    border-color: rgba(37, 211, 102, 0.35);
+    color: #25d366;
+  }
+
+  .mobile-toggle {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: rgba(217, 4, 41, 0.14);
+    border: 1px solid rgba(217, 4, 41, 0.35);
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .nav-menu {
+    top: 62px;
+    height: calc(100dvh - 62px);
+    padding: 1.25rem 1.25rem 6.5rem;
+  }
+
+  /* 3. App Quick-Navigation Stories / Chips Bar */
+  .hero-section {
+    padding-top: 72px;
+    padding-bottom: 1.5rem;
+  }
+
+  .mobile-app-shortcuts {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0 -1rem 0.75rem;
+    padding: 0.15rem 1rem 0.35rem;
+  }
+
+  .mobile-app-shortcuts::-webkit-scrollbar {
+    display: none;
+  }
+
+  .app-shortcut-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.85rem;
+    border-radius: 999px;
+    background: #14171f;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 0.78rem;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    transition: transform 0.15s ease;
+  }
+
+  .app-shortcut-chip:active {
+    transform: scale(0.95);
+  }
+
+  .app-shortcut-chip.chip-hot {
+    background: linear-gradient(135deg, rgba(217, 4, 41, 0.28) 0%, rgba(18, 20, 26, 0.95) 100%);
+    border-color: rgba(239, 35, 60, 0.55);
+    color: #ffffff;
+  }
+
+  .app-shortcut-chip.chip-kaspi {
+    background: linear-gradient(135deg, rgba(241, 70, 53, 0.22) 0%, rgba(18, 20, 26, 0.95) 100%);
+    border-color: rgba(241, 70, 53, 0.45);
+    color: #ffb3ab;
+  }
+
+  .chip-emoji {
+    font-size: 0.92rem;
+    line-height: 1;
+  }
+
+  /* 4. Compact 2-Column Live Gym Occupancy App Widget */
+  .live-occupancy-bar {
+    padding: 0.7rem 0.85rem;
+    margin-bottom: 0.75rem;
+    border-radius: 16px;
+    gap: 0.55rem;
+    background: #12141a;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+  }
+
+  .occ-status-head {
+    font-size: 0.74rem;
+    white-space: normal;
+    line-height: 1.3;
+  }
+
+  .occ-branches-wrap {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.45rem;
+    width: 100%;
+  }
+
+  .occ-branch-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 10px;
+    padding: 0.42rem 0.55rem;
+    font-size: 0.7rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.25rem;
+  }
+
+  .occ-meter {
+    width: 100%;
+    height: 4px;
+    order: 3;
+  }
+
+  .occ-pct {
+    font-size: 0.68rem;
+  }
+
+  /* 5. Mobile App Hero Card & 2x2 Bento Stat Widgets */
+  .hj-hero-card {
+    border-radius: 22px;
+    padding: 1.15rem;
+    min-height: 390px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
+  }
+
+  .hj-hero-top {
+    gap: 0.45rem;
+  }
+
+  .hero-badge-award {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.68rem;
+  }
+
+  .award-text {
+    font-size: 0.68rem;
+  }
+
+  .hj-hero-top .hero-card-badge {
+    display: none;
+  }
+
+  .hj-hero-body {
+    margin-top: 1.5rem;
+  }
+
+  .hj-hero-eyebrow {
+    font-size: 0.66rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .hj-hero-h1 {
+    font-size: 1.95rem;
+    line-height: 1.02;
+  }
+
+  .hj-hero-question {
+    font-size: 0.84rem;
+    line-height: 1.45;
+    margin-top: 0.6rem;
+  }
+
+  .hj-hero-actions {
+    margin-top: 1.15rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
+    width: 100%;
+  }
+
+  .hj-hero-actions #heroCtaBtn {
+    grid-column: span 2;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0.48rem 0.5rem 0.48rem 1.15rem;
+    font-size: 0.82rem;
+  }
+
+  .hj-hero-actions .hj-pill-ghost,
+  .hj-hero-actions .btn-play-video {
+    width: 100%;
+    justify-content: center;
+    padding: 0.6rem 0.65rem;
+    font-size: 0.74rem;
+    border-radius: 14px;
+    background: rgba(18, 20, 26, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    margin: 0;
+  }
+
+  .hj-hero-actions .play-circle {
+    width: 24px;
+    height: 24px;
+  }
+
+  .hj-hero-actions .play-circle svg {
+    width: 11px;
+    height: 11px;
+  }
+
+  .hj-hero-foot {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    font-size: 0.7rem;
+    gap: 0.25rem;
+    line-height: 1.35;
+  }
+
+  /* 2x2 Apple Fitness / Super-App Bento Widget Grid */
   .hj-hero-bento {
-    grid-template-columns: 1fr;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+    margin-top: 0.6rem;
+  }
+
+  .hj-bento-stat {
+    min-height: 138px;
+    padding: 1rem;
+    border-radius: 18px;
   }
 
   .hj-bento-stat.span-2 {
-    grid-column: span 1;
+    grid-column: span 2;
+    min-height: 130px;
   }
 
-  .hj-quit-grid {
-    grid-template-columns: 1fr;
+  .hj-bento-num {
+    font-size: 1.95rem;
   }
 
+  .hj-bento-text {
+    font-size: 0.78rem;
+    padding-top: 0.55rem;
+    line-height: 1.32;
+  }
+
+  /* 6. Compact Editorial Section Headers on Mobile */
+  .hj-ed-head {
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .hj-label {
+    font-size: 0.68rem;
+  }
+
+  .hj-headline {
+    font-size: 1.45rem;
+    line-height: 1.12;
+  }
+
+  .hj-lead {
+    font-size: 0.85rem;
+    margin-top: 0.4rem;
+    line-height: 1.45;
+  }
+
+  /* 7. Horizontal Touch-Snap Carousels (App-Style Card Swiping) */
+  .hj-quit-grid,
+  .hj-bento-6,
+  .hj-trials-grid,
+  .programs-grid,
+  .trainers-grid,
+  .pricing-grid,
+  .hj-stories-track,
+  .reviews-grid,
+  .gallery-grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 0.75rem !important;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding: 0.2rem 1rem 0.85rem !important;
+  }
+
+  .hj-quit-grid::-webkit-scrollbar,
+  .hj-bento-6::-webkit-scrollbar,
+  .hj-trials-grid::-webkit-scrollbar,
+  .programs-grid::-webkit-scrollbar,
+  .trainers-grid::-webkit-scrollbar,
+  .pricing-grid::-webkit-scrollbar,
+  .hj-stories-track::-webkit-scrollbar,
+  .reviews-grid::-webkit-scrollbar,
+  .gallery-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Individual Snap Card Dimensions */
   .hj-quit-card {
-    min-height: auto;
+    flex: 0 0 80vw;
+    max-width: 310px;
+    min-height: 240px;
+    padding: 1.25rem;
+    border-radius: 20px;
+    scroll-snap-align: center;
   }
 
-  .hj-trials-grid {
-    grid-template-columns: 1fr;
+  .hj-quit-svg {
+    width: 56px;
+    height: 56px;
   }
 
-  .hj-bento-6 {
-    grid-template-columns: 1fr;
+  .hj-quit-bottom {
+    padding-top: 1rem;
   }
 
+  .hj-quit-title {
+    font-size: 1.08rem;
+  }
+
+  .hj-bento-item,
   .hj-bento-item.span-2 {
-    grid-column: span 1;
+    flex: 0 0 82vw;
+    max-width: 320px;
+    min-height: 265px;
+    padding: 1.25rem;
+    border-radius: 20px;
+    scroll-snap-align: center;
+  }
+
+  .hj-bento-bigstat {
+    font-size: 2.35rem;
+  }
+
+  .hj-bento-title {
+    font-size: 1.1rem;
+  }
+
+  .hj-bento-desc {
+    font-size: 0.82rem;
+  }
+
+  /* Formula Compact App Layout */
+  .hj-formula-banner {
+    padding: 1.35rem;
+    border-radius: 20px;
+    margin-bottom: 0.75rem;
+  }
+
+  .hj-formula-eq {
+    font-size: 1.22rem;
+    gap: 0.35rem 0.55rem;
+  }
+
+  .hj-formula-note {
+    font-size: 0.84rem;
+    margin-top: 0.65rem;
   }
 
   .hj-formula-split {
     grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  .hj-formula-card {
+    padding: 1.35rem;
+    border-radius: 20px;
+    gap: 1rem;
   }
 
   .hj-formula-multiply-badge {
     position: static;
     transform: none;
-    margin: -0.5rem auto;
+    width: 38px;
+    height: 38px;
+    font-size: 1.1rem;
+    margin: -0.35rem auto;
   }
 
-  .hj-stories-track {
+  .hj-formula-stat-num {
+    font-size: 1.9rem;
+  }
+
+  /* 8. Branches Segmented Switcher & Compact Cards */
+  .branch-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+    background: #12141a;
+    padding: 0.3rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 1.25rem;
+  }
+
+  .branch-tab-btn {
+    width: 100%;
+    padding: 0.65rem 0.5rem;
+    font-size: 0.74rem;
+    border-radius: 12px;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .branch-info-card {
+    padding: 1.35rem;
+    border-radius: 20px;
+  }
+
+  .branch-name {
+    font-size: 1.35rem;
+  }
+
+  .branch-features-list {
+    margin: 1rem 0 1.25rem;
+    gap: 0.6rem;
+  }
+
+  .branch-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
+  }
+
+  .branch-actions .btn {
+    width: 100%;
+    padding: 0.7rem 0.6rem;
+    font-size: 0.76rem;
+  }
+
+  /* 9. Interactive 3D Isometric Studio Layout — Mobile App View */
+  .hj-iso-topbar {
+    padding: 0.85rem 1rem;
+  }
+
+  .hj-iso-branch-switch {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hj-iso-branch-btn {
+    text-align: center;
+    padding: 0.45rem 0.5rem;
+    font-size: 0.72rem;
+  }
+
+  .hj-iso-canvas {
+    min-height: 210px;
+    padding: 0.4rem 0.5rem;
+  }
+
+  .hj-iso-footer {
+    padding: 0.75rem 1rem;
+  }
+
+  .hj-zone-pills {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0.45rem -1rem 0;
+    padding: 0 1rem 0.2rem;
+  }
+
+  .hj-zone-pills::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hj-zone-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 0.45rem 0.85rem;
+    font-size: 0.75rem;
+  }
+
+  .hj-zone-preview {
+    border-radius: 20px;
+  }
+
+  .hj-zone-media {
+    height: 175px;
+  }
+
+  .hj-zone-body {
+    padding: 1.15rem;
+  }
+
+  .hj-zone-title {
+    font-size: 1.15rem;
+  }
+
+  .hj-zone-desc {
+    font-size: 0.83rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .hj-zone-tags {
+    margin-bottom: 1rem;
+  }
+
+  /* 10. Programs, Trainers, Trials & Pricing Carousels */
+  .programs-filter {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    justify-content: flex-start;
+    gap: 0.45rem;
+    margin: 0 -1rem 1.25rem;
+    padding: 0.1rem 1rem 0.35rem;
+  }
+
+  .programs-filter::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 0.5rem 0.95rem;
+    font-size: 0.76rem;
+    border-radius: 999px;
+  }
+
+  .program-card {
+    flex: 0 0 82vw;
+    max-width: 315px;
+    border-radius: 20px;
+    scroll-snap-align: center;
+  }
+
+  .program-img-wrap {
+    height: 185px;
+  }
+
+  .program-content {
+    padding: 1.25rem;
+  }
+
+  .program-title {
+    font-size: 1.15rem;
+  }
+
+  .trainer-card {
+    flex: 0 0 78vw;
+    max-width: 295px;
+    border-radius: 20px;
+    scroll-snap-align: center;
+  }
+
+  .trainer-media {
+    height: 230px;
+  }
+
+  .trainer-body {
+    padding: 1.15rem;
+  }
+
+  .hj-trial-card {
+    flex: 0 0 85vw;
+    max-width: 330px;
+    padding: 1.35rem;
+    border-radius: 20px;
+    scroll-snap-align: center;
+  }
+
+  .hj-trial-title {
+    font-size: 1.35rem;
+  }
+
+  .hj-trial-price {
+    font-size: 1.65rem;
+  }
+
+  .pricing-card {
+    flex: 0 0 84vw;
+    max-width: 325px;
+    padding: 1.5rem 1.25rem;
+    border-radius: 20px;
+    scroll-snap-align: center;
+  }
+
+  .price-amount {
+    font-size: 2.1rem;
+  }
+
+  /* 11. Calculators (Kaspi 0-0-12 & КБЖУ) App Widget Styling */
+  .calc-container {
+    margin-top: 2rem;
+    padding: 1.25rem;
+    border-radius: 20px;
+  }
+
+  .calc-title {
+    font-size: 1.3rem;
+  }
+
+  .calc-subtitle {
+    font-size: 0.84rem;
+    margin-bottom: 1.15rem;
+  }
+
+  .calc-group {
+    margin-bottom: 1.1rem;
+  }
+
+  .calc-options-row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 0.45rem;
+    padding-bottom: 0.2rem;
+  }
+
+  .calc-options-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .calc-chip {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 0.55rem 0.95rem;
+    font-size: 0.8rem;
+    border-radius: 12px;
+  }
+
+  .calc-result-box {
+    padding: 1.35rem;
+    border-radius: 18px;
+  }
+
+  .result-price {
+    font-size: 2.25rem;
+  }
+
+  /* Results & Diagnostics */
+  .hj-kpi-stack {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+
+  .hj-kpi-card.kpi-crimson {
+    grid-column: span 2;
+  }
+
+  .hj-kpi-card {
+    padding: 1.15rem;
+    border-radius: 18px;
+  }
+
+  .hj-kpi-val {
+    font-size: 1.9rem;
+  }
+
+  .hj-chart-panel {
+    padding: 1.25rem;
+    border-radius: 20px;
+  }
+
+  .diag-wrapper {
+    border-radius: 20px;
+    gap: 0;
+  }
+
+  .diag-form-panel,
+  .diag-result-panel {
+    padding: 1.25rem;
+  }
+
+  .diag-input-grid {
+    gap: 0.55rem;
+  }
+
+  .diag-num-input {
+    font-size: 16px;
+    padding: 0.6rem 0.5rem;
+  }
+
+  /* 12. Mobile App Schedule (Horizontal Day Ribbon + App Class Cards) */
+  .schedule-controls {
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .days-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    width: calc(100% + 2rem);
+    margin: 0 -1rem;
+    padding: 0.1rem 1rem 0.3rem;
+  }
+
+  .days-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .day-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 0.55rem 0.95rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+  }
+
+  .branch-filter-sched {
+    width: 100%;
+  }
+
+  .branch-filter-sched .form-select {
+    font-size: 16px;
+    border-radius: 12px;
+  }
+
+  .schedule-table-wrap {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #scheduleTableBody {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .schedule-row {
+    background: #12141a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 0.9rem 1rem;
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    align-items: center;
+    gap: 0.35rem 0.65rem;
+  }
+
+  .sched-time {
+    font-size: 0.95rem;
+    background: rgba(217, 4, 41, 0.14);
+    border: 1px solid rgba(217, 4, 41, 0.32);
+    color: #ff4d6d;
+    padding: 0.35rem 0.45rem;
+    border-radius: 10px;
+    text-align: center;
+    grid-row: span 2;
+  }
+
+  .sched-name {
+    font-size: 0.9rem;
+    line-height: 1.25;
+    grid-column: 2;
+  }
+
+  .sched-trainer {
+    display: none;
+  }
+
+  .sched-hall {
+    grid-column: 2;
+    font-size: 0.74rem;
+    margin: 0;
+  }
+
+  .schedule-row .btn {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0.48rem 0.8rem !important;
+    font-size: 0.74rem !important;
+    border-radius: 999px !important;
+    background: rgba(217, 4, 41, 0.18);
+    border-color: rgba(217, 4, 41, 0.45);
+    color: #ffffff;
+  }
+
+  /* 13. Stories, Reviews, Gallery & Video Tour */
+  .hj-story-card {
+    flex: 0 0 58vw;
+    max-width: 220px;
+    scroll-snap-align: start;
+  }
+
+  .review-card {
+    flex: 0 0 84vw;
+    max-width: 325px;
+    padding: 1.35rem;
+    border-radius: 20px;
+    scroll-snap-align: center;
+  }
+
+  .gallery-item,
+  .gallery-item.span-2,
+  .gallery-item.row-2 {
+    flex: 0 0 82vw;
+    max-width: 315px;
+    height: 235px !important;
+    border-radius: 20px;
+    scroll-snap-align: center;
+  }
+
+  .video-banner-card {
+    height: 300px;
+    border-radius: 22px;
+  }
+
+  .btn-big-play {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1rem;
+  }
+
+  .video-banner-title {
+    font-size: 1.35rem;
+  }
+
+  .video-banner-desc {
+    font-size: 0.84rem;
+  }
+
+  /* 14. FAQ, Contacts & Final CTA */
+  .faq-question {
+    padding: 1rem 1.15rem;
+    font-size: 0.9rem;
+  }
+
+  .faq-item.active .faq-answer {
+    padding: 0 1.15rem 1.1rem;
+    font-size: 0.84rem;
+  }
+
+  .contact-branch-card {
+    padding: 1.35rem;
+    border-radius: 20px;
+  }
+
+  .contact-branch-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .hj-final-cta {
+    padding: 3.25rem 0;
+  }
+
+  /* 15. Native 5-Tab Bottom App Bar (#mobileAppTabbar) */
+  .mobile-app-tabbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(64px + env(safe-area-inset-bottom, 0px));
+    padding: 0.35rem 0.5rem calc(0.35rem + env(safe-area-inset-bottom, 0px));
+    background: rgba(12, 14, 20, 0.94);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.65);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    z-index: 1500;
+  }
+
+  .app-tab-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.22rem;
+    color: rgba(255, 255, 255, 0.52);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 0.25rem 0;
+    transition: color 0.2s ease, transform 0.15s ease;
+  }
+
+  .app-tab-item:active {
+    transform: scale(0.92);
+  }
+
+  .app-tab-item.active {
+    color: #ffffff;
+  }
+
+  .app-tab-item.active .app-tab-icon {
+    fill: var(--primary-light);
+    filter: drop-shadow(0 0 8px rgba(239, 35, 60, 0.6));
+  }
+
+  .app-tab-icon {
+    width: 21px;
+    height: 21px;
+    fill: currentColor;
+    transition: fill 0.2s ease;
+  }
+
+  .app-tab-center-cta {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.18rem;
+    cursor: pointer;
+    position: relative;
+    top: -12px;
+    padding: 0;
+  }
+
+  .app-tab-fab {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ef233c 0%, #b8001f 100%);
+    border: 3px solid #0a0b0e;
+    box-shadow: 0 6px 20px rgba(217, 4, 41, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    transition: transform 0.15s ease;
+  }
+
+  .app-tab-center-cta:active .app-tab-fab {
+    transform: scale(0.92);
+  }
+
+  .app-tab-fab svg {
+    width: 22px;
+    height: 22px;
+    fill: #ffffff;
+  }
+
+  .app-tab-fab-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.02em;
+  }
+
+  /* 16. Native Mobile Bottom-Sheet Booking Modal */
+  #leadModal.modal-backdrop {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  #leadModal .modal-box {
+    max-width: 100%;
+    border-radius: 26px 26px 0 0;
+    padding: 1rem 1.35rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    border-bottom: none;
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  #leadModal.active .modal-box {
+    transform: translateY(0);
+  }
+
+  .modal-sheet-handle {
+    display: block;
+    width: 42px;
+    height: 5px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.22);
+    margin: 0 auto 1rem;
+  }
+
+  .modal-title {
+    font-size: 1.35rem;
+  }
+
+  .modal-subtitle {
+    font-size: 0.84rem;
+    margin-bottom: 1.15rem;
+  }
+
+  .form-input,
+  .form-select {
+    font-size: 16px;
+    padding: 0.8rem 1rem;
+    border-radius: 14px;
   }
 }
 
-@media (max-width: 480px) {
-  .hj-stories-track {
-    grid-template-columns: 1fr;
-  }
-}
 
 

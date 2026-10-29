@@ -3,7 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0b0e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Sparta Fitness">
+  <link rel="manifest" href="manifest.json">
   
   <title>Sparta Fitness Уральск — Премиальная сеть фитнес-клубов | 2 филиала</title>
   <meta name="description" content="Фитнес-клуб Sparta Fitness в Уральске. Победитель 2GIS Awards 2026 (рейтинг 4.9 ★). 2 филиала: мкр. Северо-Восток-2, 47/3 и ул. Курмангазы, 112/1. Отдельный женский зал, финская сауна, аэройога, тренажерный зал. Рассрочка Kaspi 0-0-12.">
@@ -180,6 +185,14 @@
             <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4.5M11 3v6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
         </button>
+
+        <!-- Mobile App Quick Call & WhatsApp Icons -->
+        <a href="tel:+77078545495" class="mobile-header-icon-btn" aria-label="Позвонить в клуб">
+          <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-2.2 2.2a15.05 15.05 0 0 1-6.59-6.59l2.2-2.21a.96.96 0 0 0 .25-1A11.36 11.36 0 0 1 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-.99-1.12z"/></svg>
+        </a>
+        <a href="https://wa.me/77078545495" target="_blank" class="mobile-header-icon-btn wa-btn" aria-label="Написать в WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+        </a>
         
         <!-- Mobile Hamburger Toggle -->
         <button class="mobile-toggle" id="mobileToggle" aria-label="Открыть меню">
@@ -195,6 +208,38 @@
     <!-- ================= HERO SECTION (BENTO EDITORIAL ARCHITECTURE) ================= -->
     <section class="hero-section" id="hero">
       <div class="container">
+
+        <!-- Mobile Web App Quick-Navigation Stories / Chips Bar -->
+        <div class="mobile-app-shortcuts" aria-label="Быстрая навигация по приложению">
+          <a href="#trials" class="app-shortcut-chip chip-hot">
+            <span class="chip-emoji">🔥</span>
+            <span>Пробная 2 000 ₸</span>
+          </a>
+          <a href="#studio-layout" class="app-shortcut-chip">
+            <span class="chip-emoji">🗺</span>
+            <span>3D-План зала</span>
+          </a>
+          <a href="#calculator" class="app-shortcut-chip chip-kaspi">
+            <span class="chip-emoji">💳</span>
+            <span>Kaspi 0-0-12</span>
+          </a>
+          <a href="#schedule" class="app-shortcut-chip">
+            <span class="chip-emoji">📅</span>
+            <span>Расписание</span>
+          </a>
+          <a href="#programs" class="app-shortcut-chip">
+            <span class="chip-emoji">👩</span>
+            <span>Женский зал</span>
+          </a>
+          <a href="#diagnostics" class="app-shortcut-chip">
+            <span class="chip-emoji">🧮</span>
+            <span>Расчет КБЖУ</span>
+          </a>
+          <a href="#branches" class="app-shortcut-chip">
+            <span class="chip-emoji">📍</span>
+            <span>2 Филиала</span>
+          </a>
+        </div>
         
         <!-- Live Real-Time Gym Occupancy Bar -->
         <div class="live-occupancy-bar" aria-label="Статус работы клубов в реальном времени">
@@ -2270,20 +2315,36 @@
     </div>
   </footer>
 
-  <!-- ================= MOBILE STICKY ACTION BAR ================= -->
-  <div class="mobile-sticky-bar">
-    <a href="tel:+77078545495" class="btn btn-secondary" style="flex: 1; padding: 0.75rem 1rem;">
-      <svg class="btn-icon" viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-2.2 2.2a15.05 15.05 0 0 1-6.59-6.59l2.2-2.21a.96.96 0 0 0 .25-1A11.36 11.36 0 0 1 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-.99-1.12z"/></svg>
-      Позвонить
+  <!-- ================= MOBILE WEB APP BOTTOM TAB BAR (5-TAB NATIVE UX) ================= -->
+  <nav class="mobile-app-tabbar" id="mobileAppTabbar" aria-label="Нижнее меню приложения">
+    <a href="#hero" class="app-tab-item active" data-tab-target="hero">
+      <svg viewBox="0 0 24 24" class="app-tab-icon"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      <span>Главная</span>
     </a>
-    <button class="btn btn-primary" onclick="openLeadModal('Быстрая запись')" style="flex: 1; padding: 0.75rem 1rem;">
-      Записаться
+    <a href="#studio-layout" class="app-tab-item" data-tab-target="studio-layout">
+      <svg viewBox="0 0 24 24" class="app-tab-icon"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg>
+      <span>3D-Клуб</span>
+    </a>
+    <button type="button" class="app-tab-center-cta" onclick="openLeadModal('Запись через мобильное приложение')" aria-label="Записаться на тренировку">
+      <span class="app-tab-fab">
+        <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </span>
+      <span class="app-tab-fab-label">Запись</span>
     </button>
-  </div>
+    <a href="#pricing" class="app-tab-item" data-tab-target="pricing">
+      <svg viewBox="0 0 24 24" class="app-tab-icon"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+      <span>Цены</span>
+    </a>
+    <a href="#schedule" class="app-tab-item" data-tab-target="schedule">
+      <svg viewBox="0 0 24 24" class="app-tab-icon"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+      <span>График</span>
+    </a>
+  </nav>
 
-  <!-- ================= LEAD BOOKING MODAL ================= -->
+  <!-- ================= LEAD BOOKING MODAL (BOTTOM SHEET ON MOBILE) ================= -->
   <div class="modal-backdrop" id="leadModal">
     <div class="modal-box">
+      <div class="modal-sheet-handle" aria-hidden="true"></div>
       <button class="modal-close-btn" id="closeModalBtn" aria-label="Закрыть">✕</button>
       <h3 class="modal-title">Запись на тренировку</h3>
       <p class="modal-subtitle">Оставьте ваши контакты — администратор свяжется с вами и забронирует место со скидкой</p>

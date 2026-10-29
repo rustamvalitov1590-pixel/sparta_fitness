@@ -9,6 +9,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const readingProgress = document.getElementById('readingProgress');
   const sections = document.querySelectorAll('main section[id]');
   const navLinks = document.querySelectorAll('.nav-menu a.nav-link');
+  const appTabItems = document.querySelectorAll('#mobileAppTabbar .app-tab-item[data-tab-target]');
+
+  const tabSectionMap = {
+    'hero': 'hero',
+    'why-quit': 'hero',
+    'advantages': 'hero',
+    'formula': 'hero',
+    'branches': 'studio-layout',
+    'studio-layout': 'studio-layout',
+    'programs': 'studio-layout',
+    'trainers': 'studio-layout',
+    'pricing': 'pricing',
+    'results': 'pricing',
+    'schedule': 'schedule',
+    'reviews': 'schedule',
+    'gallery': 'schedule',
+    'videoSection': 'schedule',
+    'faq': 'schedule',
+    'contacts': 'schedule',
+    'final-cta': 'schedule'
+  };
 
   function handleScroll() {
     if (window.scrollY > 40) {
@@ -24,8 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Scroll-spy for top-level navigation links
-    let currentSectionId = '';
-    const scrollPos = window.scrollY + 160;
+    let currentSectionId = 'hero';
+    const scrollPos = window.scrollY + 180;
     sections.forEach(sec => {
       if (scrollPos >= sec.offsetTop && scrollPos < sec.offsetTop + sec.offsetHeight) {
         currentSectionId = sec.getAttribute('id');
@@ -39,6 +60,12 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         link.classList.remove('active');
       }
+    });
+
+    // Update Mobile Web App Bottom Tab Bar active state
+    const activeAppTab = tabSectionMap[currentSectionId] || 'hero';
+    appTabItems.forEach(tab => {
+      tab.classList.toggle('active', tab.getAttribute('data-tab-target') === activeAppTab);
     });
   }
 
@@ -760,7 +787,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update bottom pills
     isoZoneBtns.forEach(btn => {
-      btn.classList.toggle('active', btn.getAttribute('data-zone-btn') === zoneKey);
+      const isMatch = btn.getAttribute('data-zone-btn') === zoneKey;
+      btn.classList.toggle('active', isMatch);
+      if (isMatch && window.innerWidth <= 768 && btn.parentElement) {
+        const container = btn.parentElement;
+        const scrollLeft = btn.offsetLeft - (container.clientWidth / 2) + (btn.clientWidth / 2);
+        container.scrollTo({ left: Math.max(0, scrollLeft), behavior: 'smooth' });
+      }
     });
 
     // Update preview card
