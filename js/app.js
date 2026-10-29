@@ -138,19 +138,42 @@ document.addEventListener('DOMContentLoaded', () => {
   const navDropdown = document.getElementById('navDropdown');
   const dropdownToggleBtn = document.getElementById('dropdownToggleBtn');
 
+  function closeMobileMenu() {
+    if (!mobileToggle || !navMenu) return;
+    mobileToggle.classList.remove('active');
+    navMenu.classList.remove('open');
+    document.body.style.overflow = '';
+    if (navDropdown) navDropdown.classList.remove('active');
+    if (dropdownToggleBtn) dropdownToggleBtn.setAttribute('aria-expanded', 'false');
+  }
+
   if (mobileToggle && navMenu) {
-    mobileToggle.addEventListener('click', () => {
-      mobileToggle.classList.toggle('active');
-      navMenu.classList.toggle('open');
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const willOpen = !navMenu.classList.contains('open');
+      mobileToggle.classList.toggle('active', willOpen);
+      navMenu.classList.toggle('open', willOpen);
+      document.body.style.overflow = willOpen ? 'hidden' : '';
     });
 
-    // Close mobile menu on actual link click (exclude dropdown button)
-    navMenu.querySelectorAll('a.nav-link, a.dropdown-item').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileToggle.classList.remove('active');
-        navMenu.classList.remove('open');
-        if (navDropdown) navDropdown.classList.remove('active');
+    // Close mobile menu on actual link click or drawer CTA button click
+    navMenu.querySelectorAll('a.nav-link, a.dropdown-item, .mobile-drawer-cta button').forEach(el => {
+      el.addEventListener('click', () => {
+        closeMobileMenu();
       });
+    });
+
+    // Close mobile menu when clicking outside drawer on mobile
+    document.addEventListener('click', (e) => {
+      if (navMenu.classList.contains('open') && !navMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
+        closeMobileMenu();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1140 && navMenu.classList.contains('open')) {
+        closeMobileMenu();
+      }
     });
   }
 
@@ -789,11 +812,6 @@ document.addEventListener('DOMContentLoaded', () => {
     isoZoneBtns.forEach(btn => {
       const isMatch = btn.getAttribute('data-zone-btn') === zoneKey;
       btn.classList.toggle('active', isMatch);
-      if (isMatch && window.innerWidth <= 768 && btn.parentElement) {
-        const container = btn.parentElement;
-        const scrollLeft = btn.offsetLeft - (container.clientWidth / 2) + (btn.clientWidth / 2);
-        container.scrollTo({ left: Math.max(0, scrollLeft), behavior: 'smooth' });
-      }
     });
 
     // Update preview card
@@ -860,11 +878,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Escape Key to close modals
+  // Escape Key to close modals and mobile menu
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       if (leadModal) leadModal.classList.remove('active');
       if (lightboxModal) lightboxModal.classList.remove('active');
+      closeMobileMenu();
     }
   });
 

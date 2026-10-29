@@ -52,6 +52,10 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   color-scheme: dark;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -59,9 +63,33 @@ body {
   background-color: var(--bg-dark);
   color: var(--text-main);
   line-height: 1.6;
+  width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+main,
+section,
+.site-header,
+.site-footer {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+/* Prevent any grid or flex item from forcing container overflow */
+.container > *,
+[class*="-grid"] > *,
+.hj-hero-bento > *,
+.hj-bento-6 > *,
+.hj-formula-split > *,
+.hj-ed-head > *,
+.diag-wrapper > * {
+  min-width: 0;
+  max-width: 100%;
 }
 
 /* Background Atmosphere Grid & Glow */
@@ -70,8 +98,8 @@ body::before {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background: 
     radial-gradient(circle at 15% 15%, rgba(217, 4, 41, 0.12) 0%, transparent 40%),
     radial-gradient(circle at 85% 75%, rgba(139, 0, 0, 0.15) 0%, transparent 45%),
@@ -175,15 +203,17 @@ ul {
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 0.95rem;
+  line-height: 1.25;
   letter-spacing: 0.03em;
   text-transform: uppercase;
+  text-align: center;
   border-radius: var(--radius-md);
   border: 1px solid transparent;
   cursor: pointer;
   transition: all var(--transition-normal);
   position: relative;
   overflow: hidden;
-  white-space: nowrap;
+  max-width: 100%;
 }
 
 .btn-primary {
@@ -240,11 +270,20 @@ ul {
   left: 0;
   width: 100%;
   z-index: 1000;
-  background: rgba(10, 11, 14, 0.85);
+  background: rgba(10, 11, 14, 0.88);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+  overflow: visible;
+}
+
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border-subtle);
-  transition: all var(--transition-normal);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .site-header.scrolled {
@@ -508,38 +547,50 @@ ul {
 
 .mobile-toggle {
   display: none;
-  background: transparent;
-  border: none;
-  width: 44px;
-  height: 44px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  width: 42px;
+  height: 42px;
   cursor: pointer;
-  padding: 8px;
+  padding: 0;
   flex-direction: column;
-  justify-content: space-around;
-  z-index: 1001;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  z-index: 1002;
+  flex-shrink: 0;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.mobile-toggle:hover,
+.mobile-toggle.active {
+  background: rgba(217, 4, 41, 0.16);
+  border-color: rgba(217, 4, 41, 0.45);
 }
 
 .mobile-toggle span {
   display: block;
-  width: 100%;
-  height: 2.5px;
+  width: 20px;
+  height: 2px;
   background: #ffffff;
   border-radius: 2px;
-  transition: all var(--transition-normal);
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, background 0.2s ease;
 }
 
 .mobile-toggle.active span:nth-child(1) {
-  transform: translateY(8.5px) rotate(45deg);
-  background: var(--primary);
+  transform: translateY(7px) rotate(45deg);
+  background: var(--primary-light);
 }
 
 .mobile-toggle.active span:nth-child(2) {
   opacity: 0;
+  transform: scaleX(0);
 }
 
 .mobile-toggle.active span:nth-child(3) {
-  transform: translateY(-8.5px) rotate(-45deg);
-  background: var(--primary);
+  transform: translateY(-7px) rotate(-45deg);
+  background: var(--primary-light);
 }
 
 /* ==========================================================================
@@ -2272,288 +2323,8 @@ ul {
   gap: 1rem;
 }
 
-/* ==========================================================================
-   RESPONSIVE BREAKPOINTS (ALL SCREEN RESOLUTIONS)
-   ========================================================================== */
+/* Responsive breakpoints consolidated at the bottom of the stylesheet */
 
-@media (max-width: 1240px) {
-  .nav-container {
-    padding: 0 1.25rem;
-    gap: 1rem;
-  }
-  .nav-menu {
-    gap: 1.1rem;
-  }
-  .nav-link {
-    font-size: 0.79rem;
-    letter-spacing: 0.03em;
-  }
-  .header-phone-label {
-    display: none;
-  }
-  .header-phone-number {
-    font-size: 0.88rem;
-  }
-  .header-actions .btn-primary {
-    padding: 0.6rem 1.1rem;
-    font-size: 0.82rem;
-  }
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-  .hero-showcase {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  .pricing-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .gallery-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 1080px) {
-  .nav-menu {
-    position: fixed;
-    top: 80px;
-    left: 0;
-    width: 100%;
-    height: calc(100vh - 80px);
-    background: rgba(10, 11, 14, 0.98);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 2rem 2rem 3rem 2rem;
-    gap: 1.1rem;
-    overflow-y: auto;
-    transform: translateX(-100%);
-    transition: transform var(--transition-normal);
-  }
-
-  .nav-menu.open {
-    transform: translateX(0);
-  }
-
-  .mobile-toggle {
-    display: flex;
-  }
-
-  .mobile-only {
-    display: block;
-  }
-
-  .nav-dropdown {
-    width: 100%;
-  }
-
-  .nav-dropdown-btn {
-    width: 100%;
-    justify-content: space-between;
-    padding: 0.5rem 0;
-  }
-
-  .nav-dropdown-menu {
-    position: static;
-    transform: none !important;
-    min-width: 100%;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--border-subtle);
-    margin-top: 0.5rem;
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    display: flex;
-  }
-
-  .mobile-drawer-cta {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-    margin-top: 1rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--border-subtle);
-  }
-
-  .mobile-phone-link {
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-    color: #ffffff;
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 1.05rem;
-    text-decoration: none;
-  }
-
-  .mobile-drawer-cta .btn {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .header-actions .btn-primary {
-    display: none;
-  }
-
-  .branch-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .advantages-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .programs-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .calc-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .reviews-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .contacts-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .schedule-row {
-    grid-template-columns: 85px 1.2fr 0.9fr 0.9fr 125px;
-    padding: 1rem 1.25rem;
-    gap: 0.5rem;
-  }
-
-  .trainers-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .diag-wrapper {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .section {
-    padding: 4rem 0;
-  }
-
-  .hero-title {
-    font-size: 2.4rem;
-  }
-
-  .hero-stats {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
-  }
-
-  .advantages-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .programs-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .trainers-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .pricing-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .pricing-card.featured {
-    transform: none;
-  }
-  .pricing-card.featured:hover {
-    transform: translateY(-5px);
-  }
-
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .gallery-item.span-2 {
-    grid-column: span 1;
-  }
-
-  .gallery-item.row-2 {
-    grid-row: span 1;
-    height: 260px;
-  }
-
-  .mobile-sticky-bar {
-    display: flex;
-  }
-
-  body {
-    padding-bottom: 70px;
-  }
-
-  .schedule-row {
-    grid-template-columns: 75px 1fr;
-    gap: 0.5rem;
-    padding: 1.15rem 1rem;
-  }
-
-  .sched-trainer, .sched-hall {
-    grid-column: span 2;
-    font-size: 0.85rem;
-  }
-
-  .schedule-row .btn {
-    grid-column: span 2;
-    width: 100%;
-    margin-top: 0.35rem;
-  }
-
-  .schedule-row.header {
-    display: none;
-  }
-
-  .live-occupancy-bar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-cta-group {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .btn {
-    width: 100%;
-  }
-
-  .hero-floating-card {
-    display: none;
-  }
-
-  .branch-tab-btn {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .gallery-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .calc-container {
-    padding: 1.5rem;
-  }
-
-  .diag-form-panel,
-  .diag-result-panel {
-    padding: 1.5rem;
-  }
-}
 
 /* ==========================================================================
    LIVE GYM OCCUPANCY & STATUS WIDGET
@@ -3017,18 +2788,20 @@ ul {
 .hj-pill {
   display: inline-flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.75rem;
   border-radius: var(--radius-full);
   padding: 0.55rem 0.6rem 0.55rem 1.45rem;
   font-family: var(--font-heading);
   font-size: 0.9rem;
+  line-height: 1.25;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.03em;
   cursor: pointer;
   border: 1px solid transparent;
   transition: all var(--transition-normal);
-  white-space: nowrap;
+  max-width: 100%;
   text-decoration: none;
 }
 
@@ -4022,7 +3795,8 @@ ul {
   width: 100%;
   max-width: 780px;
   height: auto;
-  overflow: visible;
+  overflow: hidden;
+  display: block;
   user-select: none;
 }
 
@@ -4278,40 +4052,8 @@ ul {
   align-items: center;
 }
 
-/* Responsive Breakpoints for Hero's Journey Architecture */
-@media (max-width: 1100px) {
-  .hj-ed-head {
-    grid-template-columns: 1fr;
-    gap: 0.85rem;
-  }
-
-  .hj-hero-bento {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .hj-quit-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .hj-bento-6 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .hj-results-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hj-layout-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hj-stories-track {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
 /* ==========================================================================
-   MOBILE WEB APPLICATION (PWA / NATIVE APP UX ENGINE)
+   UNIFIED RESPONSIVE & MOBILE WEB APP SYSTEM (ALL SCREEN RESOLUTIONS)
    ========================================================================== */
 
 /* Hide Mobile-Only App Shell Elements on Desktop */
@@ -4322,88 +4064,62 @@ ul {
   display: none;
 }
 
-@media (max-width: 768px) {
-  /* 1. App Shell Body & Smooth Touch Physics */
-  html {
-    scroll-padding-top: 72px;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  body {
-    padding-bottom: calc(82px + env(safe-area-inset-bottom, 0px));
-    background: #0a0b0e;
-    overflow-x: hidden;
-  }
-
-  .container {
-    padding: 0 1rem;
-  }
-
-  .section,
-  .why-quit-section,
-  .formula-section,
-  .studio-layout-section {
-    padding: 2.65rem 0;
-  }
-
-  /* 2. Native App Top Bar Header */
-  .site-header {
-    height: 62px;
-    background: rgba(10, 11, 14, 0.92);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
+/* 1. Small Desktops & Laptops (max-width: 1340px) */
+@media (max-width: 1340px) {
   .nav-container {
-    height: 62px;
-    padding: 0 0.9rem;
+    padding: 0 1.25rem;
+    gap: 0.9rem;
   }
 
-  .brand-logo {
-    gap: 0.55rem;
+  .nav-menu {
+    gap: 1rem;
   }
 
-  .brand-logo-img {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-  }
-
-  .brand-name {
-    font-size: 1.02rem;
+  .nav-link {
+    font-size: 0.76rem;
     letter-spacing: 0.02em;
   }
 
-  .brand-tagline {
-    font-size: 0.58rem;
-    letter-spacing: 0.08em;
+  .header-phone-box {
+    display: none;
+  }
+}
+
+/* 2. Tablets & Compact Laptops (max-width: 1140px) — Burger Drawer Activates */
+@media (max-width: 1140px) {
+  .site-header {
+    height: 68px;
   }
 
-  .header-phone-box,
+  .nav-container {
+    height: 68px;
+    padding: 0 1.25rem;
+  }
+
+  .mobile-toggle {
+    display: flex;
+  }
+
+  .mobile-only {
+    display: flex;
+  }
+
   #openModalBtn {
-    display: none !important;
-  }
-
-  .header-actions {
-    gap: 0.45rem;
+    display: none;
   }
 
   .mobile-header-icon-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.12);
     color: #ffffff;
+    flex-shrink: 0;
     transition: transform 0.15s ease, background 0.15s ease;
-  }
-
-  .mobile-header-icon-btn:active {
-    transform: scale(0.92);
   }
 
   .mobile-header-icon-btn svg {
@@ -4418,63 +4134,291 @@ ul {
     color: #25d366;
   }
 
-  .mobile-toggle {
-    width: 38px;
-    height: 38px;
+  /* Clean, Structured Slide-Over Navigation Drawer */
+  .nav-menu {
+    position: fixed;
+    top: 68px;
+    right: 0;
+    left: auto;
+    width: min(100%, 380px);
+    height: calc(100dvh - 68px);
+    background: #0d0f14;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: -20px 0 50px rgba(0, 0, 0, 0.85);
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 1rem 1.15rem calc(5.5rem + env(safe-area-inset-bottom, 0px));
+    gap: 0.45rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transform: translateX(105%);
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s;
+    z-index: 1400;
+  }
+
+  .nav-menu.open {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .nav-menu .nav-link {
+    width: 100%;
+    padding: 0.82rem 1rem;
     border-radius: 12px;
-    background: rgba(217, 4, 41, 0.14);
-    border: 1px solid rgba(217, 4, 41, 0.35);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-menu .nav-link::after {
+    display: none;
+  }
+
+  .nav-menu .nav-link:hover,
+  .nav-menu .nav-link.active {
+    background: rgba(217, 4, 41, 0.16);
+    border-color: rgba(217, 4, 41, 0.45);
+    color: #ffffff;
+  }
+
+  /* Collapsible Accordion for "О клубе" inside Burger Menu */
+  .nav-dropdown {
+    width: 100%;
+  }
+
+  .nav-dropdown::after {
+    display: none;
+  }
+
+  .nav-dropdown-btn {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .nav-dropdown-menu,
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown:focus-within .nav-dropdown-menu {
+    position: static;
+    transform: none !important;
+    width: 100%;
+    min-width: 0;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    margin-top: 0.4rem;
+    padding: 0.4rem;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    display: none;
+  }
+
+  .nav-dropdown.active .nav-dropdown-menu {
+    display: flex;
+  }
+
+  .dropdown-item {
+    padding: 0.55rem 0.7rem;
+  }
+
+  .mobile-drawer-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    margin-top: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .mobile-phone-link {
+    display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
+    gap: 0.6rem;
+    padding: 0.78rem 1rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+  }
+
+  .mobile-drawer-cta .btn {
+    width: 100%;
+  }
+
+  /* Proportional Tablet Grids */
+  .hj-ed-head {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-bottom: 2.2rem;
+  }
+
+  .hj-hero-bento {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hj-quit-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hj-bento-6 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hj-results-grid,
+  .hj-layout-grid,
+  .branch-grid,
+  .calc-grid,
+  .diag-wrapper,
+  .contacts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .diag-result-panel {
+    border-left: none;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .programs-grid,
+  .trainers-grid,
+  .pricing-grid,
+  .reviews-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .hj-stories-track,
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .schedule-row {
+    grid-template-columns: 90px 1.3fr 0.9fr 0.9fr 130px;
+    padding: 1rem 1.25rem;
+    gap: 0.5rem;
+  }
+}
+
+/* 3. Smartphones & Mobile Web App Layout (max-width: 768px) */
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 70px;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .section,
+  .why-quit-section,
+  .formula-section,
+  .studio-layout-section {
+    padding: 2.75rem 0;
+  }
+
+  /* Compact App Top Bar */
+  .site-header {
+    height: 62px;
+  }
+
+  .nav-container {
+    height: 62px;
+    padding: 0 0.85rem;
+    gap: 0.5rem;
   }
 
   .nav-menu {
     top: 62px;
     height: calc(100dvh - 62px);
-    padding: 1.25rem 1.25rem 6.5rem;
+    width: 100%;
+    border-left: none;
   }
 
-  /* 3. App Quick-Navigation Stories / Chips Bar */
+  .brand-logo {
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .brand-logo-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    flex-shrink: 0;
+  }
+
+  .brand-name {
+    font-size: 0.96rem;
+    letter-spacing: 0.02em;
+  }
+
+  .brand-tagline {
+    font-size: 0.54rem;
+    letter-spacing: 0.06em;
+  }
+
+  .header-actions {
+    gap: 0.4rem;
+  }
+
+  .mobile-header-icon-btn,
+  .mobile-toggle {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+
+  /* Hero Section & Quick Navigation Chips (Strictly Inside Container!) */
   .hero-section {
-    padding-top: 72px;
-    padding-bottom: 1.5rem;
+    min-height: auto;
+    padding-top: 74px;
+    padding-bottom: 1.75rem;
   }
 
   .mobile-app-shortcuts {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0.5rem;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    margin: 0 -1rem 0.75rem;
-    padding: 0.15rem 1rem 0.35rem;
-  }
-
-  .mobile-app-shortcuts::-webkit-scrollbar {
-    display: none;
+    gap: 0.4rem;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 0.75rem 0;
+    padding: 0;
   }
 
   .app-shortcut-chip {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.5rem 0.85rem;
+    gap: 0.35rem;
+    padding: 0.42rem 0.75rem;
     border-radius: 999px;
     background: #14171f;
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.92);
-    font-size: 0.78rem;
+    font-size: 0.74rem;
     font-weight: 700;
-    white-space: nowrap;
-    flex-shrink: 0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    line-height: 1.2;
     transition: transform 0.15s ease;
-  }
-
-  .app-shortcut-chip:active {
-    transform: scale(0.95);
   }
 
   .app-shortcut-chip.chip-hot {
@@ -4489,25 +4433,20 @@ ul {
     color: #ffb3ab;
   }
 
-  .chip-emoji {
-    font-size: 0.92rem;
-    line-height: 1;
-  }
-
-  /* 4. Compact 2-Column Live Gym Occupancy App Widget */
+  /* Compact 2-Column Live Occupancy Bar */
   .live-occupancy-bar {
-    padding: 0.7rem 0.85rem;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.75rem 0.85rem;
     margin-bottom: 0.75rem;
     border-radius: 16px;
     gap: 0.55rem;
-    background: #12141a;
-    border: 1px solid rgba(255, 255, 255, 0.09);
   }
 
   .occ-status-head {
     font-size: 0.74rem;
     white-space: normal;
-    line-height: 1.3;
+    line-height: 1.35;
   }
 
   .occ-branches-wrap {
@@ -4521,8 +4460,8 @@ ul {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.07);
     border-radius: 10px;
-    padding: 0.42rem 0.55rem;
-    font-size: 0.7rem;
+    padding: 0.45rem 0.55rem;
+    font-size: 0.68rem;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -4540,25 +4479,23 @@ ul {
     font-size: 0.68rem;
   }
 
-  /* 5. Mobile App Hero Card & 2x2 Bento Stat Widgets */
+  /* Proportional Hero Bento Card */
   .hj-hero-card {
-    border-radius: 22px;
-    padding: 1.15rem;
-    min-height: 390px;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
-  }
-
-  .hj-hero-top {
-    gap: 0.45rem;
+    border-radius: 20px;
+    padding: 1.25rem;
+    min-height: auto;
   }
 
   .hero-badge-award {
     padding: 0.35rem 0.7rem;
-    font-size: 0.68rem;
+    margin-bottom: 0;
+    max-width: 100%;
   }
 
   .award-text {
-    font-size: 0.68rem;
+    font-size: 0.66rem;
+    white-space: normal;
+    line-height: 1.3;
   }
 
   .hj-hero-top .hero-card-badge {
@@ -4566,168 +4503,121 @@ ul {
   }
 
   .hj-hero-body {
-    margin-top: 1.5rem;
+    padding-top: 1.5rem;
   }
 
   .hj-hero-eyebrow {
-    font-size: 0.66rem;
-    margin-bottom: 0.35rem;
+    font-size: 0.68rem;
+    margin-bottom: 0.4rem;
   }
 
   .hj-hero-h1 {
-    font-size: 1.95rem;
-    line-height: 1.02;
+    font-size: clamp(1.7rem, 6.5vw, 2.3rem);
+    line-height: 1.06;
+    margin-bottom: 0.75rem;
   }
 
   .hj-hero-question {
-    font-size: 0.84rem;
-    line-height: 1.45;
-    margin-top: 0.6rem;
+    font-size: 0.86rem;
+    line-height: 1.48;
+    margin-bottom: 1.25rem;
   }
 
   .hj-hero-actions {
-    margin-top: 1.15rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.55rem;
+    gap: 0.5rem;
     width: 100%;
   }
 
   .hj-hero-actions #heroCtaBtn {
-    grid-column: span 2;
+    grid-column: 1 / -1;
     width: 100%;
-    justify-content: space-between;
-    padding: 0.48rem 0.5rem 0.48rem 1.15rem;
-    font-size: 0.82rem;
+    padding: 0.5rem 0.55rem 0.5rem 1rem;
+    font-size: 0.78rem;
   }
 
   .hj-hero-actions .hj-pill-ghost,
   .hj-hero-actions .btn-play-video {
     width: 100%;
     justify-content: center;
-    padding: 0.6rem 0.65rem;
-    font-size: 0.74rem;
-    border-radius: 14px;
-    background: rgba(18, 20, 26, 0.82);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    margin: 0;
+    padding: 0.6rem 0.5rem;
+    font-size: 0.72rem;
+    border-radius: 12px;
+    text-align: center;
   }
 
   .hj-hero-actions .play-circle {
     width: 24px;
     height: 24px;
-  }
-
-  .hj-hero-actions .play-circle svg {
-    width: 11px;
-    height: 11px;
+    flex-shrink: 0;
   }
 
   .hj-hero-foot {
-    margin-top: 1rem;
+    margin-top: 1.15rem;
     padding-top: 0.75rem;
-    font-size: 0.7rem;
-    gap: 0.25rem;
-    line-height: 1.35;
+    font-size: 0.72rem;
+    gap: 0.35rem;
+    line-height: 1.38;
   }
 
-  /* 2x2 Apple Fitness / Super-App Bento Widget Grid */
+  /* 2-Column Hero Stat Grid (100% Inside Container) */
   .hj-hero-bento {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.6rem;
-    margin-top: 0.6rem;
+    gap: 0.65rem;
+    margin-top: 0.65rem;
   }
 
   .hj-bento-stat {
-    min-height: 138px;
+    min-height: 135px;
     padding: 1rem;
     border-radius: 18px;
   }
 
   .hj-bento-stat.span-2 {
-    grid-column: span 2;
-    min-height: 130px;
+    grid-column: 1 / -1;
+    min-height: 125px;
   }
 
   .hj-bento-num {
-    font-size: 1.95rem;
+    font-size: 1.85rem;
   }
 
   .hj-bento-text {
     font-size: 0.78rem;
-    padding-top: 0.55rem;
-    line-height: 1.32;
+    padding-top: 0.5rem;
+    line-height: 1.35;
   }
 
-  /* 6. Compact Editorial Section Headers on Mobile */
+  /* Section Headings */
   .hj-ed-head {
     gap: 0.4rem;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.35rem;
   }
 
-  .hj-label {
-    font-size: 0.68rem;
+  .hj-headline,
+  .section-title {
+    font-size: clamp(1.38rem, 5.2vw, 1.85rem);
+    line-height: 1.15;
+    overflow-wrap: break-word;
   }
 
-  .hj-headline {
-    font-size: 1.45rem;
-    line-height: 1.12;
+  .hj-lead,
+  .section-subtitle {
+    font-size: 0.88rem;
+    line-height: 1.5;
   }
 
-  .hj-lead {
-    font-size: 0.85rem;
-    margin-top: 0.4rem;
-    line-height: 1.45;
-  }
-
-  /* 7. Horizontal Touch-Snap Carousels (App-Style Card Swiping) */
-  .hj-quit-grid,
-  .hj-bento-6,
-  .hj-trials-grid,
-  .programs-grid,
-  .trainers-grid,
-  .pricing-grid,
-  .hj-stories-track,
-  .reviews-grid,
-  .gallery-grid {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    gap: 0.75rem !important;
-    margin-left: -1rem;
-    margin-right: -1rem;
-    padding: 0.2rem 1rem 0.85rem !important;
-  }
-
-  .hj-quit-grid::-webkit-scrollbar,
-  .hj-bento-6::-webkit-scrollbar,
-  .hj-trials-grid::-webkit-scrollbar,
-  .programs-grid::-webkit-scrollbar,
-  .trainers-grid::-webkit-scrollbar,
-  .pricing-grid::-webkit-scrollbar,
-  .hj-stories-track::-webkit-scrollbar,
-  .reviews-grid::-webkit-scrollbar,
-  .gallery-grid::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Individual Snap Card Dimensions */
+  /* Proportional Cards & Grids (Zero Overflow, No Negative Margins!) */
   .hj-quit-card {
-    flex: 0 0 80vw;
-    max-width: 310px;
-    min-height: 240px;
+    min-height: auto;
     padding: 1.25rem;
-    border-radius: 20px;
-    scroll-snap-align: center;
+    border-radius: 18px;
   }
 
   .hj-quit-svg {
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
   }
 
   .hj-quit-bottom {
@@ -4735,56 +4625,46 @@ ul {
   }
 
   .hj-quit-title {
-    font-size: 1.08rem;
+    font-size: 1.05rem;
   }
 
-  .hj-bento-item,
-  .hj-bento-item.span-2 {
-    flex: 0 0 82vw;
-    max-width: 320px;
-    min-height: 265px;
+  .hj-bento-item {
+    min-height: 230px;
     padding: 1.25rem;
-    border-radius: 20px;
-    scroll-snap-align: center;
+    border-radius: 18px;
+  }
+
+  .hj-bento-item.span-2 {
+    grid-column: 1 / -1;
   }
 
   .hj-bento-bigstat {
-    font-size: 2.35rem;
+    font-size: 2.25rem;
   }
 
   .hj-bento-title {
-    font-size: 1.1rem;
+    font-size: 1.08rem;
   }
 
-  .hj-bento-desc {
-    font-size: 0.82rem;
-  }
-
-  /* Formula Compact App Layout */
+  /* Formula Section */
   .hj-formula-banner {
-    padding: 1.35rem;
-    border-radius: 20px;
-    margin-bottom: 0.75rem;
+    padding: 1.25rem;
+    border-radius: 18px;
   }
 
   .hj-formula-eq {
-    font-size: 1.22rem;
-    gap: 0.35rem 0.55rem;
-  }
-
-  .hj-formula-note {
-    font-size: 0.84rem;
-    margin-top: 0.65rem;
+    font-size: clamp(1.1rem, 4.5vw, 1.45rem);
+    gap: 0.35rem 0.5rem;
   }
 
   .hj-formula-split {
     grid-template-columns: 1fr;
-    gap: 0.65rem;
+    gap: 0.75rem;
   }
 
   .hj-formula-card {
-    padding: 1.35rem;
-    border-radius: 20px;
+    padding: 1.25rem;
+    border-radius: 18px;
     gap: 1rem;
   }
 
@@ -4798,57 +4678,56 @@ ul {
   }
 
   .hj-formula-stat-num {
-    font-size: 1.9rem;
+    font-size: 1.85rem;
   }
 
-  /* 8. Branches Segmented Switcher & Compact Cards */
-  .branch-tabs {
+  /* Branches Section */
+  .branch-nav-tabs {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.4rem;
-    background: #12141a;
-    padding: 0.3rem;
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
     margin-bottom: 1.25rem;
   }
 
   .branch-tab-btn {
     width: 100%;
-    padding: 0.65rem 0.5rem;
-    font-size: 0.74rem;
-    border-radius: 12px;
-    text-align: center;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 0.8rem 1rem;
+    font-size: 0.85rem;
   }
 
-  .branch-info-card {
-    padding: 1.35rem;
-    border-radius: 20px;
+  .branch-grid {
+    padding: 1.25rem;
+    gap: 1.25rem;
+    border-radius: 18px;
   }
 
   .branch-name {
-    font-size: 1.35rem;
+    font-size: 1.4rem;
   }
 
-  .branch-features-list {
-    margin: 1rem 0 1.25rem;
-    gap: 0.6rem;
+  .branch-amenities {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+    margin: 1.1rem 0;
+  }
+
+  .branch-photo-box,
+  .branch-map-embed {
+    height: 200px;
   }
 
   .branch-actions {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 0.55rem;
   }
 
   .branch-actions .btn {
     width: 100%;
-    padding: 0.7rem 0.6rem;
-    font-size: 0.76rem;
   }
 
-  /* 9. Interactive 3D Isometric Studio Layout — Mobile App View */
+  /* 3D Isometric Studio Layout (100% Contained) */
   .hj-iso-topbar {
     padding: 0.85rem 1rem;
   }
@@ -4861,45 +4740,34 @@ ul {
 
   .hj-iso-branch-btn {
     text-align: center;
-    padding: 0.45rem 0.5rem;
-    font-size: 0.72rem;
+    padding: 0.45rem 0.4rem;
+    font-size: 0.7rem;
   }
 
   .hj-iso-canvas {
-    min-height: 210px;
-    padding: 0.4rem 0.5rem;
+    min-height: auto;
+    padding: 0.65rem;
   }
 
   .hj-iso-footer {
-    padding: 0.75rem 1rem;
+    padding: 0.85rem 1rem;
   }
 
   .hj-zone-pills {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    margin: 0.45rem -1rem 0;
-    padding: 0 1rem 0.2rem;
-  }
-
-  .hj-zone-pills::-webkit-scrollbar {
-    display: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.5rem 0 0 0;
+    padding: 0;
   }
 
   .hj-zone-btn {
-    flex-shrink: 0;
-    white-space: nowrap;
-    padding: 0.45rem 0.85rem;
-    font-size: 0.75rem;
-  }
-
-  .hj-zone-preview {
-    border-radius: 20px;
+    font-size: 0.72rem;
+    padding: 0.38rem 0.7rem;
   }
 
   .hj-zone-media {
-    height: 175px;
+    height: 185px;
   }
 
   .hj-zone-body {
@@ -4910,240 +4778,131 @@ ul {
     font-size: 1.15rem;
   }
 
-  .hj-zone-desc {
-    font-size: 0.83rem;
-    margin-bottom: 0.85rem;
-  }
-
-  .hj-zone-tags {
-    margin-bottom: 1rem;
-  }
-
-  /* 10. Programs, Trainers, Trials & Pricing Carousels */
+  /* Programs, Trainers, Trials & Pricing */
   .programs-filter {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    justify-content: flex-start;
-    gap: 0.45rem;
-    margin: 0 -1rem 1.25rem;
-    padding: 0.1rem 1rem 0.35rem;
-  }
-
-  .programs-filter::-webkit-scrollbar {
-    display: none;
+    gap: 0.4rem;
+    margin: 0 0 1.35rem 0;
+    padding: 0;
   }
 
   .filter-btn {
-    flex-shrink: 0;
-    white-space: nowrap;
-    padding: 0.5rem 0.95rem;
-    font-size: 0.76rem;
-    border-radius: 999px;
+    padding: 0.48rem 0.85rem;
+    font-size: 0.74rem;
   }
 
-  .program-card {
-    flex: 0 0 82vw;
-    max-width: 315px;
-    border-radius: 20px;
-    scroll-snap-align: center;
+  .hj-trials-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
   }
 
-  .program-img-wrap {
-    height: 185px;
-  }
-
-  .program-content {
-    padding: 1.25rem;
-  }
-
-  .program-title {
-    font-size: 1.15rem;
-  }
-
-  .trainer-card {
-    flex: 0 0 78vw;
-    max-width: 295px;
-    border-radius: 20px;
-    scroll-snap-align: center;
-  }
-
-  .trainer-media {
-    height: 230px;
-  }
-
-  .trainer-body {
-    padding: 1.15rem;
-  }
-
-  .hj-trial-card {
-    flex: 0 0 85vw;
-    max-width: 330px;
+  .hj-trial-card,
+  .pricing-card,
+  .review-card,
+  .contact-branch-card {
     padding: 1.35rem;
-    border-radius: 20px;
-    scroll-snap-align: center;
+    border-radius: 18px;
   }
 
   .hj-trial-title {
     font-size: 1.35rem;
   }
 
-  .hj-trial-price {
-    font-size: 1.65rem;
-  }
-
-  .pricing-card {
-    flex: 0 0 84vw;
-    max-width: 325px;
-    padding: 1.5rem 1.25rem;
-    border-radius: 20px;
-    scroll-snap-align: center;
-  }
-
   .price-amount {
-    font-size: 2.1rem;
+    font-size: 2rem;
   }
 
-  /* 11. Calculators (Kaspi 0-0-12 & КБЖУ) App Widget Styling */
+  /* Calculators (Kaspi 0-0-12 & КБЖУ) */
   .calc-container {
     margin-top: 2rem;
     padding: 1.25rem;
-    border-radius: 20px;
+    border-radius: 18px;
   }
 
   .calc-title {
     font-size: 1.3rem;
   }
 
-  .calc-subtitle {
-    font-size: 0.84rem;
-    margin-bottom: 1.15rem;
-  }
-
-  .calc-group {
-    margin-bottom: 1.1rem;
-  }
-
   .calc-options-row {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
     gap: 0.45rem;
-    padding-bottom: 0.2rem;
-  }
-
-  .calc-options-row::-webkit-scrollbar {
-    display: none;
   }
 
   .calc-chip {
-    flex-shrink: 0;
-    white-space: nowrap;
-    padding: 0.55rem 0.95rem;
-    font-size: 0.8rem;
-    border-radius: 12px;
+    padding: 0.55rem 0.85rem;
+    font-size: 0.78rem;
   }
 
   .calc-result-box {
-    padding: 1.35rem;
-    border-radius: 18px;
+    padding: 1.25rem;
   }
 
   .result-price {
-    font-size: 2.25rem;
+    font-size: 2.15rem;
   }
 
-  /* Results & Diagnostics */
   .hj-kpi-stack {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.6rem;
+    gap: 0.65rem;
   }
 
   .hj-kpi-card.kpi-crimson {
-    grid-column: span 2;
+    grid-column: 1 / -1;
   }
 
-  .hj-kpi-card {
-    padding: 1.15rem;
-    border-radius: 18px;
-  }
-
-  .hj-kpi-val {
-    font-size: 1.9rem;
-  }
-
-  .hj-chart-panel {
-    padding: 1.25rem;
-    border-radius: 20px;
-  }
-
-  .diag-wrapper {
-    border-radius: 20px;
-    gap: 0;
-  }
-
+  .hj-kpi-card,
+  .hj-chart-panel,
   .diag-form-panel,
   .diag-result-panel {
     padding: 1.25rem;
+    border-radius: 18px;
   }
 
   .diag-input-grid {
-    gap: 0.55rem;
+    gap: 0.5rem;
   }
 
   .diag-num-input {
     font-size: 16px;
-    padding: 0.6rem 0.5rem;
+    padding: 0.6rem 0.4rem;
   }
 
-  /* 12. Mobile App Schedule (Horizontal Day Ribbon + App Class Cards) */
+  .diag-kcal-val {
+    font-size: 2.3rem;
+  }
+
+  /* Schedule (100% Inside Container) */
   .schedule-controls {
     gap: 0.75rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.15rem;
   }
 
   .days-tabs {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    width: calc(100% + 2rem);
-    margin: 0 -1rem;
-    padding: 0.1rem 1rem 0.3rem;
-  }
-
-  .days-tabs::-webkit-scrollbar {
-    display: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    gap: 0.4rem;
   }
 
   .day-btn {
-    flex-shrink: 0;
-    white-space: nowrap;
-    padding: 0.55rem 0.95rem;
-    border-radius: 999px;
-    font-size: 0.78rem;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.76rem;
+    flex: 1 1 auto;
+    text-align: center;
   }
 
   .branch-filter-sched {
     width: 100%;
   }
 
-  .branch-filter-sched .form-select {
-    font-size: 16px;
-    border-radius: 12px;
-  }
-
   .schedule-table-wrap {
     background: transparent;
     border: none;
     box-shadow: none;
-    display: flex;
-    flex-direction: column;
+  }
+
+  .schedule-row.header {
+    display: none;
   }
 
   #scheduleTableBody {
@@ -5160,22 +4919,22 @@ ul {
     display: grid;
     grid-template-columns: 64px 1fr auto;
     align-items: center;
-    gap: 0.35rem 0.65rem;
+    gap: 0.3rem 0.65rem;
   }
 
   .sched-time {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     background: rgba(217, 4, 41, 0.14);
     border: 1px solid rgba(217, 4, 41, 0.32);
     color: #ff4d6d;
-    padding: 0.35rem 0.45rem;
+    padding: 0.35rem 0.4rem;
     border-radius: 10px;
     text-align: center;
     grid-row: span 2;
   }
 
   .sched-name {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     line-height: 1.25;
     grid-column: 2;
   }
@@ -5187,67 +4946,58 @@ ul {
   .sched-hall {
     grid-column: 2;
     font-size: 0.74rem;
-    margin: 0;
   }
 
   .schedule-row .btn {
     grid-column: 3;
     grid-row: 1 / span 2;
     width: auto !important;
-    margin: 0 !important;
-    padding: 0.48rem 0.8rem !important;
-    font-size: 0.74rem !important;
+    padding: 0.48rem 0.75rem !important;
+    font-size: 0.72rem !important;
     border-radius: 999px !important;
-    background: rgba(217, 4, 41, 0.18);
-    border-color: rgba(217, 4, 41, 0.45);
-    color: #ffffff;
   }
 
-  /* 13. Stories, Reviews, Gallery & Video Tour */
-  .hj-story-card {
-    flex: 0 0 58vw;
-    max-width: 220px;
-    scroll-snap-align: start;
+  /* Stories & Gallery: Clean 2-Column Proportional Grid */
+  .hj-stories-track {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
   }
 
-  .review-card {
-    flex: 0 0 84vw;
-    max-width: 325px;
-    padding: 1.35rem;
-    border-radius: 20px;
-    scroll-snap-align: center;
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
   }
 
   .gallery-item,
-  .gallery-item.span-2,
   .gallery-item.row-2 {
-    flex: 0 0 82vw;
-    max-width: 315px;
-    height: 235px !important;
-    border-radius: 20px;
-    scroll-snap-align: center;
+    grid-row: span 1;
+    height: 190px;
+  }
+
+  .gallery-item.span-2 {
+    grid-column: 1 / -1;
+    height: 210px;
   }
 
   .video-banner-card {
-    height: 300px;
-    border-radius: 22px;
+    height: 280px;
+    border-radius: 20px;
   }
 
   .btn-big-play {
-    width: 64px;
-    height: 64px;
-    margin-bottom: 1rem;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 0.85rem;
   }
 
   .video-banner-title {
-    font-size: 1.35rem;
+    font-size: 1.3rem;
   }
 
   .video-banner-desc {
     font-size: 0.84rem;
   }
 
-  /* 14. FAQ, Contacts & Final CTA */
   .faq-question {
     padding: 1rem 1.15rem;
     font-size: 0.9rem;
@@ -5258,31 +5008,23 @@ ul {
     font-size: 0.84rem;
   }
 
-  .contact-branch-card {
-    padding: 1.35rem;
-    border-radius: 20px;
-  }
-
-  .contact-branch-title {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-  }
-
   .hj-final-cta {
-    padding: 3.25rem 0;
+    padding: 3rem 0;
   }
 
-  /* 15. Native 5-Tab Bottom App Bar (#mobileAppTabbar) */
+  /* 5-Tab Bottom App Bar (#mobileAppTabbar) */
   .mobile-app-tabbar {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+    width: 100%;
+    max-width: 100%;
     height: calc(64px + env(safe-area-inset-bottom, 0px));
-    padding: 0.35rem 0.5rem calc(0.35rem + env(safe-area-inset-bottom, 0px));
-    background: rgba(12, 14, 20, 0.94);
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
+    padding: 0.35rem 0.4rem calc(0.35rem + env(safe-area-inset-bottom, 0px));
+    background: rgba(12, 14, 20, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.65);
     display: grid;
@@ -5296,17 +5038,12 @@ ul {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.22rem;
-    color: rgba(255, 255, 255, 0.52);
-    font-size: 0.65rem;
+    gap: 0.2rem;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.64rem;
     font-weight: 700;
     text-decoration: none;
-    padding: 0.25rem 0;
-    transition: color 0.2s ease, transform 0.15s ease;
-  }
-
-  .app-tab-item:active {
-    transform: scale(0.92);
+    padding: 0.2rem 0;
   }
 
   .app-tab-item.active {
@@ -5315,14 +5052,12 @@ ul {
 
   .app-tab-item.active .app-tab-icon {
     fill: var(--primary-light);
-    filter: drop-shadow(0 0 8px rgba(239, 35, 60, 0.6));
   }
 
   .app-tab-icon {
-    width: 21px;
-    height: 21px;
+    width: 20px;
+    height: 20px;
     fill: currentColor;
-    transition: fill 0.2s ease;
   }
 
   .app-tab-center-cta {
@@ -5332,45 +5067,39 @@ ul {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.18rem;
+    gap: 0.15rem;
     cursor: pointer;
     position: relative;
-    top: -12px;
+    top: -10px;
     padding: 0;
   }
 
   .app-tab-fab {
-    width: 48px;
-    height: 48px;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
     background: linear-gradient(135deg, #ef233c 0%, #b8001f 100%);
     border: 3px solid #0a0b0e;
-    box-shadow: 0 6px 20px rgba(217, 4, 41, 0.65);
+    box-shadow: 0 6px 18px rgba(217, 4, 41, 0.6);
     display: flex;
     align-items: center;
     justify-content: center;
     color: #ffffff;
-    transition: transform 0.15s ease;
-  }
-
-  .app-tab-center-cta:active .app-tab-fab {
-    transform: scale(0.92);
   }
 
   .app-tab-fab svg {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     fill: #ffffff;
   }
 
   .app-tab-fab-label {
-    font-size: 0.65rem;
+    font-size: 0.64rem;
     font-weight: 800;
     color: #ffffff;
-    letter-spacing: 0.02em;
   }
 
-  /* 16. Native Mobile Bottom-Sheet Booking Modal */
+  /* Native Mobile Bottom-Sheet Booking Modal */
   #leadModal.modal-backdrop {
     align-items: flex-end;
     padding: 0;
@@ -5378,8 +5107,8 @@ ul {
 
   #leadModal .modal-box {
     max-width: 100%;
-    border-radius: 26px 26px 0 0;
-    padding: 1rem 1.35rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    border-radius: 24px 24px 0 0;
+    padding: 1rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
     border-bottom: none;
     transform: translateY(100%);
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -5391,29 +5120,45 @@ ul {
 
   .modal-sheet-handle {
     display: block;
-    width: 42px;
+    width: 40px;
     height: 5px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.22);
-    margin: 0 auto 1rem;
-  }
-
-  .modal-title {
-    font-size: 1.35rem;
-  }
-
-  .modal-subtitle {
-    font-size: 0.84rem;
-    margin-bottom: 1.15rem;
+    margin: 0 auto 0.85rem;
   }
 
   .form-input,
   .form-select {
     font-size: 16px;
     padding: 0.8rem 1rem;
-    border-radius: 14px;
+    border-radius: 12px;
   }
 }
+
+/* 4. Small Phones (max-width: 580px) — Single Column Cards with Clean Proportions */
+@media (max-width: 580px) {
+  .hj-quit-grid,
+  .hj-bento-6,
+  .programs-grid,
+  .trainers-grid,
+  .pricing-grid,
+  .reviews-grid {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+
+  .schedule-row {
+    grid-template-columns: 60px 1fr;
+  }
+
+  .schedule-row .btn {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    width: 100% !important;
+    margin-top: 0.35rem !important;
+  }
+}
+
 
 
 
